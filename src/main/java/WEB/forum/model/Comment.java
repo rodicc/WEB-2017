@@ -1,12 +1,20 @@
 package WEB.forum.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class Comment {
+import javax.xml.bind.annotation.XmlRootElement;
+@XmlRootElement
+public class Comment implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Long commentID;
-	private Topic parenttopic;
+	private Topic parentTopic;
 	private User author;
 	private Date date;
 	private Comment parentComment;
@@ -17,15 +25,30 @@ public class Comment {
 	private Boolean edited;
 	
 	public Comment() {
-		
+		this. childComments = new ArrayList<Comment>();
+	}
+	
+	public Comment(Long commentID, Topic parentTopic, User author, Date date, Comment parentComment, 
+			ArrayList<Comment> childComments,String content, Short likes, Short disslikes, Boolean edited) {
+		super();
+		this.commentID = commentID;
+		this.parentTopic = parentTopic;
+		this.author = author;
+		this.date = date;
+		this.parentComment = parentComment;
+		this.childComments = childComments;
+		this.content = content;
+		this.likes = likes;
+		this.disslikes = disslikes;
+		this.edited = edited;
 	}
 	
 	
 	
 	/* GETTERS & SETTERS*/
 	
-	public Topic getParenttopic() {
-		return parenttopic;
+	public Topic getParentTopic() {
+		return parentTopic;
 	}
 	public Long getCommentID() {
 		return commentID;
@@ -33,8 +56,8 @@ public class Comment {
 	public void setCommentID(Long commentID) {
 		this.commentID = commentID;
 	}
-	public void setParenttopic(Topic parenttopic) {
-		this.parenttopic = parenttopic;
+	public void setParenttopic(Topic parentTopic) {
+		this.parentTopic = parentTopic;
 	}
 	public User getAuthor() {
 		return author;

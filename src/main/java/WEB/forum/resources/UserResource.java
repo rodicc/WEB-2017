@@ -18,7 +18,7 @@ public class UserResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<User> getUsers() {
+	public ArrayList<User> getAllUsers() {
 		return userService.getAllUsers();
 		
 	}

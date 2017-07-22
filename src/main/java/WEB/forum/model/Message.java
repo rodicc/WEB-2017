@@ -1,6 +1,15 @@
 package WEB.forum.model;
 
-public class Message {
+import java.io.Serializable;
+
+import javax.xml.bind.annotation.XmlRootElement;
+@XmlRootElement
+public class Message implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private Long messageID;
 	private User sender;
@@ -12,6 +21,14 @@ public class Message {
 		
 	}
 	
+	public Message(Long messageID, User sender, User reciever, String content, Boolean seen) {
+		this. messageID = messageID;
+		this. sender = sender;
+		this. reciever = reciever;
+		this.content = content;
+		this.seen = seen;
+		
+	}
 	
 	
 	/* GETTERS & SETTERS*/

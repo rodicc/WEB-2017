@@ -1,10 +1,18 @@
 package WEB.forum.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class Topic {
+import javax.xml.bind.annotation.XmlRootElement;
+@XmlRootElement
+public class Topic implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Long topicID;
 	private SubForum parentForum;
 	private String title;
@@ -18,9 +26,23 @@ public class Topic {
 	private Short disslikes;
 	 
 	public Topic(){
-		
+		this.comments = new ArrayList<Comment>();
 	}
 	
+	public Topic(Long topicID, SubForum parent, String title, Type type, User author,
+			ArrayList<Comment> comments, String content, Date date, Short likes, Short disslikes) {
+		super();
+		this.topicID = topicID;
+		this.parentForum = parent;
+		this.title = title;
+		this.type = type;
+		this.author = author;
+		this.comments = comments;
+		this.content = content;
+		this.date = date;
+		this.likes = likes;
+		this.disslikes = disslikes;
+	}
 	
 	
 	

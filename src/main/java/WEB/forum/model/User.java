@@ -1,13 +1,19 @@
 package WEB.forum.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class User {
+public class User implements Serializable{
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private String userID;
 	private char[] password;
@@ -23,17 +29,26 @@ public class User {
 	private ArrayList<Comment> comments;
 	
 	public User() {
-		userID = new String("");
-		password = new char[0] ;
-		name = new String("");
-		surname = new String("");
-		role = Role.DEFAULT;
-		phoneNumber = new String("");
-		email = new String("");
-		regDate = new Date(0);
 		forums = new ArrayList<SubForum>();
 		topics = new ArrayList<Topic>();
 		comments = new ArrayList<Comment>();
+	}
+	
+	public User(String userID, char[] password, String name, String surname,
+			Role role, String phoneNumber,String email, Date date, ArrayList<SubForum> forums,
+			ArrayList<Topic> topics, ArrayList<Comment> comments  ) {
+		super();
+		this.userID = userID;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.role = role;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.regDate = date;
+		this.forums = forums;
+		this.topics = topics;
+		this.comments = comments;
 	}
 	
 	
