@@ -1,0 +1,31 @@
+<div ng-show="User.role=='ADMIN' || User.role=='MODERATOR'">
+	<table class="table">
+	<tbody>
+		<thead>
+			<tr>
+				<th class="col-md-3"><h4></h4></th>
+				<th class="col-md-2" style="text-align: center;"><h4>Username</h4></th>
+        		<th class="col-md-2" style="text-align: center;"><h4>Account type</h4></th>
+        		<th class="col-md-5" ></th>
+			</tr>
+		
+		</thead>
+		
+		<tbody>
+	
+		<tr ng-repeat="user in users">
+			<td></td>
+			<td style="text-align: center;"><label>{{user.userID}}</label></td>
+			<td>
+				<select class="form-control" ng-model="user.role">
+					<option>DEFAULT</option>				
+					<option>MODERATOR</option>				
+					<option>ADMIN</option>
+				</select>
+			</td>
+			<td><button class="btn btn-default" ng-click="setRole(user.userID, user.role)" ng-disabled="user.userID=='admin'">Change Account Type</button></td>
+			<td></td>
+		</tr>
+		</tbody>
+	</table>
+</div>

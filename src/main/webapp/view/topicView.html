@@ -1,0 +1,164 @@
+
+<div class="well">
+	<div class="row">
+		<div class="col-md-1" style="padding: 30px; color: darkgrey;">
+			<b>{{topic.author}}</b>
+		</div>
+		<div class="col-md-11">
+			<b>{{topic.title}}</b>
+			<!-- <textarea class="form-control" style="resize: none" rows="2"
+				cols="25" readonly>{{topic.content}}</textarea>
+				 -->
+				 
+			<div min-height: 50px;> {{topic.content}} 
+				<br>
+				<img ng-if="topic.imgString" ng-src="{{topic.imgString}}" style="max-height: 400px; max-width: 1200px;">
+			</div>
+			<br>
+		
+			<b style="color: green;">{{topic.likes}}</b>
+			<span class="glyphicon glyphicon-plus" ng-show="loggedIn"
+				ng-click="topicVote('+')"></span> 
+			
+			<b style="color: red;">{{topic.disslikes}}</b>
+			<span class="glyphicon glyphicon-minus" ng-show="loggedIn"
+				ng-click="topicVote('-')"></span>
+			
+			<span class="glyphicon glyphicon-remove pull-right"
+				ng-show="User.userID == topic.author || User.role == 'ADMIN'"
+				ng-click="removeTopic()"></span> 
+				 
+			
+			
+			<span  ng-click="editTopicModal()" class="glyphicon glyphicon-pencil pull-right"
+				ng-show="User.userID == topic.author || User.role == 'ADMIN'"></span>
+				 
+					
+			
+				<span ng-click="reportModal()" class="glyphicon glyphicon-exclamation-sign pull-right"
+					ng-show="User.userID != topic.author && User.role == 'DEFAULT'"></span>
+					
+			<span class="glyphicon glyphicon-star-empty pull-right" ng-show="loggedIn && User.userID != topic.author" ng-click="saveTopic()"></span>
+					
+		</div>
+	</div>
+</div>
+<hr>
+
+<div>
+
+	<div ng-repeat="comment in topic.comments" class="well">
+		<div class="row" ng-show="!comment.deleted">
+			<div class="col-md-1" style="padding: 30px; color: darkgrey;">
+				<b>{{comment.author}}</b>
+			</div>
+			
+			<div class="col-md-11">
+
+				<!--  <textarea class="form-control" style="resize: none" rows="2"
+					cols="25" ng-disabled="User.userID != comment.author"
+					ng-model="topic.comments[comment.commentID-1].content"></textarea>
+				 -->	 
+				<div class="panel panel-default">
+    				<div class="panel-body" style="min-height: 75px; background: #f2f2f2">{{topic.comments[comment.commentID-1].content}}</div>
+  				</div>
+				
+				 
+				<b style="color: green; text-align: right">{{comment.likes}} </b>
+				<span class="glyphicon glyphicon-plus" ng-show="loggedIn"
+					ng-click="commentVote(comment.commentID, '+' )"></span>
+				
+				<b style="color: red; text-align: right">{{comment.disslikes}} </b>
+				<span class="glyphicon glyphicon-minus" ng-show="loggedIn"
+					ng-click="commentVote(comment.commentID, '-' )"></span>
+
+				<span class="glyphicon glyphicon-remove pull-right"
+					ng-show="User.userID == comment.author || User.role == 'ADMIN'  || User.role == 'MODERATOR'"
+					ng-click="removeComment(comment.commentID)"></span>
+				
+					
+			 	<span class="glyphicon glyphicon-pencil pull-right"
+					ng-show="User.userID == comment.author || User.role == 'MODERATOR'"
+					ng-click="editCommentModal(comment)"></span>
+					
+					
+				
+				<span ng-click="reportModal(comment.commentID)"  class="glyphicon glyphicon-exclamation-sign pull-right"
+					ng-show="User.userID != comment.author && User.role == 'DEFAULT'"></span>
+					
+				
+				
+				<span class="glyphicon glyphicon-star-empty pull-right" ng-show="loggedIn && User.userID != comment.author" ng-click="saveComment(comment.commentID, comment)"></span>
+			</div>
+		</div>
+		
+		<div class="row" ng-show="comment.deleted">
+			<div class="col-md-1" style="padding: 30px; color: darkgrey;  align="center">
+				<!-- <b>{{comment.author}}</b>  -->
+			</div>
+			<div class="col-md-11">
+				<b><textarea class="form-control" style="resize: none;  background: #f2f2f2" rows="2"
+					cols="25" disabled>This comment was deleted</textarea></b>
+			</div>
+		</div>
+	</div>
+
+
+	<div ng-show="loggedIn" class="form-group">
+		<textarea class="form-control" style="resize: none" rows="2" cols="25"
+			placeholder="Write a comment.." ng-model="newComment.content"></textarea>
+			</br>
+		<button class="btn btn-primary" ng-click="addComment()">Post
+			comment</button>
+	</div>
+	
+	<div id="editTopicModal" class="modal">
+		<div class="modal-content">
+			<form class="form" ng-submit="editTopic()">
+				<h1>{{topic.title}}</h1>
+				<div class="form-group">
+					<label>Content</label>
+					<textarea class="form-control" style="resize:none;" placeholder="{{topic.content}}" ng-model="topic.content"></textarea>
+					<br>	
+					<div class="btn btn-default image-preview-input">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <span class="image-preview-input-title">Edit image</span>
+                        <input type="file" name="file" id="file" accept="image/*" onchange="angular.element(this).scope().setFile(this)">
+                    </div>
+                    <br>
+                    <br>
+                    <img ng-if="topic.imgString" ng-src="{{topic.imgString}}" style="max-height: 200px; max-width: 600px;">
+				</div>
+				<button class="btn btn-primary" type="submit">Edit</button>
+			</form>
+		</div>
+	</div>
+	
+	<div id="editCommentModal" class="modal">
+		<div class="modal-content">
+			<form class="form" ng-submit="editComment(commentToEdit.commentID, topic.comments[commentToEdit.commentID-1].content)" >
+				<div class="form-group">
+					<label>Content</label>
+					<textarea class="form-control" style="resize:none;" placeholder="{{commentToEdit.content}}" ng-model="commentToEdit.content"></textarea>
+					
+				</div>
+				<button class="btn btn-primary" type="submit">Edit</button>
+			</form>
+		</div>
+	</div>
+	
+	<div id="reportModal" class="modal">
+		<div class="modal-content">
+			<h1>REPORT</h1>
+			<form class="form" ng-submit="sendReport()">
+			<div class="form-group">
+				<textarea class="form-control" style="resize:none;" ng-model="report.reportContent"></textarea>
+				<br>
+				<br>
+				<button class="btn btn-primary" type="submit">Send Report</button>
+			</div>
+			</form>
+		</div>
+	</div>
+	
+</div>

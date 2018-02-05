@@ -1,0 +1,88 @@
+<h1>My Profile</h1>
+<div>
+	<div class="row">
+		<div class="col-md-6">
+			<div><h2>Saved topics</h2></div>	
+			<div ng-repeat="topic in savedTopics" class="well">
+					<div class="row">
+						<div class="col-md-1" style="padding: 30px; color: darkgrey;">
+							<b>{{topic.author}}</b>
+						</div>
+						<div class="col-md-11">
+							<div>
+								<a ng-href="#/{{topic.parentForum}}/{{topic.title}}">{{topic.title}}</a>
+							</div>
+							<div min-height: 50px;> {{topic.content}} 
+								<br>
+								<img ng-if="topic.imgString" ng-src="{{topic.imgString}}" style="max-height: 400px; max-width: 1200px;">
+							</div>
+						</div>
+						<br>
+					</div>
+			</div>
+			<hr>
+			<div ng-repeat="comment in savedComments" class="well">
+				
+				<div class="row">
+					<div class="col-md-1" style="padding: 30px; color: darkgrey;">
+						<b>{{comment.author}}</b>
+					</div>	
+					<div class="col-md-11">
+						<div min-height: 50px;> {{comment.content}}</div>
+						<br>
+					</div>
+				</div>
+		
+		
+			
+     		
+    		</div>		
+	</div>
+	
+
+	<div class="col-md-4">
+		<div> 	
+				<div class="well" style="height: 60vh; padding: 10px">
+					<div class="row" ng-repeat="message in messages">
+						<div class="col-md-2"><b>{{message.sender}}:</b></div>
+						<div  class="col-md-10"><span  style="white-space: pre-wrap;">{{message.content}} </span></div>
+						<br id ="end">
+					</div>
+				</div>
+			    <div class="input-group add-on">
+					<input class="form-control" type="text" ng-model="newMessage">
+					<span class="input-group-btn">
+						<button class="btn btn-primary btn-md" ng-click="sendMessage()" ng-disabled="reciever==''">Send</button>
+					</span>
+				</div>
+		</div>		
+     		
+	</div>
+	
+	<div class="col-md-2">
+		<div class="input-group add-on">
+						<input type="text" class="form-control" placeholder="Search users.." ng-model="search">
+				      	<span class="input-group-btn">
+				        	<button class="btn btn-default" type="button" ng-click="searchUsers()" ><i class="glyphicon glyphicon-search"></i></button>
+				      	</span>
+		</div>  
+		<div ng-repeat="user in users">
+					<div ng-click="getChat(user.userID)">
+						<a>{{user.userID}}</a>
+					</div>
+				</div>
+	</div>
+
+
+	<!-- 
+	<div>
+		<div ng-repeat="forum in savedForums">
+					<div>
+						<a>{{forum.forumTitle}}</a>
+					</div>
+				</div>
+	</div>
+	</div>
+	
+	 -->
+</div>

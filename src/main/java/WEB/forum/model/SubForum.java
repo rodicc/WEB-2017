@@ -3,6 +3,7 @@ package WEB.forum.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class SubForum implements Serializable{
@@ -12,25 +13,33 @@ public class SubForum implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	
 	private Long subForumID;
 	private String title;
 	private String description;
 	private String iconURL;
+	private String rules;
 	private String chiefModerator;
-	private ArrayList<User> allModerators;
+	
+	
+	private ArrayList<Topic> topics; 
+	private ArrayList<String> allModerators;
 	
 	public SubForum() {
-		this.allModerators = new ArrayList<User>();
+		this.allModerators = new ArrayList<String>();
+		this.topics = new ArrayList<Topic>();
 	}
 	
-	public SubForum(Long subForumID, String title, String description, String iconURL, String chiefModerator,ArrayList<User> allModerators ) {
+	public SubForum(Long subForumID, String title, String description, String iconURL,String rules, String chiefModerator,ArrayList<String> allModerators ) {
 		super();
 		this.subForumID = subForumID;
 		this.title = title;
 		this.description = description;
 		this.iconURL = iconURL;
+		this.rules = rules;
 		this.chiefModerator = chiefModerator;
 		this.allModerators = allModerators;
+		this.topics = new ArrayList<Topic>();
 	}
 	
 	
@@ -50,6 +59,13 @@ public class SubForum implements Serializable{
 	public String getDescription() {
 		return description;
 	}
+	public String getRules() {
+		return rules;
+	}
+
+	public void setRules(String rules) {
+		this.rules = rules;
+	}
 	
 	public String getIconURL() {
 		return iconURL;
@@ -66,10 +82,18 @@ public class SubForum implements Serializable{
 	public void setChiefModerator(String chiefModerator) {
 		this.chiefModerator = chiefModerator;
 	}
-	public ArrayList<User> getAllModerators() {
+	public ArrayList<String> getAllModerators() {
 		return allModerators;
 	}
-	public void setAllModerators(ArrayList<User> allModerators) {
+	public void setAllModerators(ArrayList<String> allModerators) {
 		this.allModerators = allModerators;
+	}
+	
+	public ArrayList<Topic> getTopics() {
+		return topics;
+	}
+
+	public void setTopics(ArrayList<Topic> topics) {
+		this.topics = topics;
 	}
 }

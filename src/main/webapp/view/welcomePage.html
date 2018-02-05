@@ -1,0 +1,53 @@
+<div ng-hide="loggedIn">
+<h2>Trending topics</h2>
+	<div ng-repeat="topic in trendingTopics" class="well">
+		<div class="row">
+			<div class="col-md-1" style="padding: 30px; color: darkgrey;">
+					<b>{{topic.author}}</b>
+			</div>
+				
+			<div class="col-md-11">
+					<a ng-href="#/{{topic.parentForum}}/{{topic.title}}"><b>{{topic.title}}</b></a>
+					 <textarea class="form-control" style="resize: none" rows="2"
+						cols="25" readonly>{{topic.content}}</textarea>
+						 
+						 
+					<div min-height: 50px;> {{topic.content}} 
+				
+			</div>
+			<br>
+					
+			<b style="color: green;">{{topic.likes}}</b>&nbsp;
+			<b style="color: red;">{{topic.disslikes}}</b>
+					
+		</div>
+	</div>
+</div>
+</div>
+<div ng-show="loggedIn">
+	
+	<div ng-repeat="forum in User.savedForums" class="well">
+	<h1>{{forum.title}}</h1>
+		<div ng-repeat="topic in forum.topics">
+			<div class="row">
+				<div class="col-md-1" style="padding: 30px; color: darkgrey;">
+					<b>{{topic.author}}</b>
+				</div>
+				
+				<div class="col-md-11">
+					<b>{{topic.title}}</b>
+					<textarea class="form-control" style="resize: none" rows="2"
+						cols="25" readonly>{{topic.content}}</textarea>
+						
+						 
+				<div min-height: 50p;> {{topic.content}} 
+				
+				</div>
+				<br>	
+				<b style="color: green;">{{topic.likes}}</b>&nbsp;
+				<b style="color: red;">{{topic.disslikes}}</b>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 

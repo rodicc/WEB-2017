@@ -11,44 +11,39 @@ public class Message implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long messageID;
-	private User sender;
-	private User reciever;
+	private String sender;
+	private String reciever;
 	private String content;
-	private Boolean seen;
 	
 	public Message() {
-		
+		this. sender = "";
+		this. reciever = "";
+		this.content = "";
 	}
 	
-	public Message(Long messageID, User sender, User reciever, String content, Boolean seen) {
-		this. messageID = messageID;
+	public Message( String sender, String reciever, String content) {
+		
+		super();
+		
 		this. sender = sender;
 		this. reciever = reciever;
 		this.content = content;
-		this.seen = seen;
-		
 	}
 	
 	
 	/* GETTERS & SETTERS*/
 	
-	public User getSender() {
+	public String getSender() {
 		return sender;
 	}
-	public Long getMessageID() {
-		return messageID;
-	}
-	public void setMessageID(Long messageID) {
-		this.messageID = messageID;
-	}
-	public void setSender(User sender) {
+
+	public void setSender(String sender) {
 		this.sender = sender;
 	}
-	public User getReciever() {
+	public String getReciever() {
 		return reciever;
 	}
-	public void setReciever(User reciever) {
+	public void setReciever(String reciever) {
 		this.reciever = reciever;
 	}
 	public String getContent() {
@@ -56,12 +51,6 @@ public class Message implements Serializable{
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public Boolean getSeen() {
-		return seen;
-	}
-	public void setSeen(Boolean seen) {
-		this.seen = seen;
 	}
 	
 }

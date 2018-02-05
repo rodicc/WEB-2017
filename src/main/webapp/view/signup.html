@@ -1,0 +1,48 @@
+<div>
+	<form ng-submit="signUp()" name="register" novalidate >
+		<div class="form-group row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label class="control-label">User name:</label> 
+					<input type="text" required name="userID" class="form-control"
+						ng-model="user.userID" ng-pattern='/^[a-zA-Z0-9]{4,12}$/'>
+					<span ng-show="register.userID.$dirty&&register.userID.$error.pattern">Accepts letters and numbers, 4-12 characters in length!</span>
+				</div>
+				<div class="form-group">
+					<label  class="control-label">Password:</label>
+					<input type="password" required name="password" class="form-control" 
+						ng-model="user.password">
+				</div>
+				<div class="form-group">
+					<label class="control-label">Name:</label>
+					<input type="text" required name="Name" class="form-control" ng-model="user.name" ng-pattern='/^[a-zA-Z]+$/'>
+					<span ng-show="register.Name.$dirty&&register.Name.$error.pattern">A name can contain only letters!</span>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Surname:</label> 
+					<input type="text" required name="surname" class="form-control" ng-model="user.surname" ng-pattern='/^[a-zA-Z]+$/'>
+					<span ng-show="register.surname.$dirty&&register.surname.$error.pattern">A surname can contain only letters!</span>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Phone number:</label> 
+					<input type="text" required name="phone" class="form-control" ng-model="user.phoneNumber"  ng-pattern='/^[0-9]+$/'>
+					<span ng-show="register.phone.$dirty&&register.phone.$error.pattern">A phone number can contain only numbers!</span>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Email:</label>
+					<!-- <input name="email" type="email" required class="form-control" ng-model="user.email">
+					<span class="error" ng-show="register.email.$error.email">Please enter a valid e-mail!</span> -->
+					<input name="email" type="text" required class="form-control" ng-model="user.email" ng-pattern='/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/'> 
+					<span ng-show="register.email.$dirty&&register.email.$error.pattern">Please enter a valid e-mail!</span>
+					
+				</div>
+				<div>
+					<button type="submit" ng-disabled="register.$invalid" class="btn btn-primary btn-block btn-lg" name="signup">Sign Up</button>
+				</div>
+			</div>
+			<div class="col-md-4"></div>
+		</div>	
+	</form>
+	
+</div>

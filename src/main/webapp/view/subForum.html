@@ -1,0 +1,66 @@
+<h1>Sub Forums 
+<small>
+	<button id="addForum" ng-show="User.role=='ADMIN' || User.role=='MODERATOR'"><span class="glyphicon glyphicon-plus"></span></button>
+</small>
+</h1>
+
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th class="col-md-8"><h4>Forum name</h4></th>
+        <th class="col-md-2" style="text-align: center;"><h4>Topics</h4></th>
+        <th class="col-md-2" style=" text-align: center;"><h4>Created by</h4></th>
+      </tr>
+    </thead>
+    <tbody>
+    	<tr ng-repeat="subForum in subForums">
+    		<td>
+    			<div>
+    				<a ng-href="#{{subForum.title}}" style="color:rgb(40,40,40);"><b>{{subForum.title}}</b></a>
+					<span class="glyphicon glyphicon-trash" ng-show="User.role=='ADMIN' || User.role=='MODERATOR'" ng-click="deleteSubForum(subForum.title)"></span>
+				</div>
+				<div>
+					<h6>{{subForum.description}}</h6>
+				</div>    		
+    		</td>
+    		<td style="text-align: center;">{{subForum.topics.length}}</td>
+    		<td style="text-align: center;"><b>{{subForum.chiefModerator}}</b></td>
+    	</tr>
+    </tbody>
+</table>    
+<div class="input-group">
+	<input type="text" required name="title" class="form-control" ng-model="search.title" placeholder="Title">
+	<input type="text" required name="mod" class="form-control" ng-model="search.mod" placeholder="Moderator">
+	<input type="text" required name="desc" class="form-control" ng-model="search.desc" placeholder="Description">
+	<button type="submit" class="btn btn-primary btn-md" ng-click="searchSubForums()">Search</button>
+</div>
+
+
+<div id="addForumModal" class="modal">
+
+	<span class="close">&times;</span>
+	
+	<div class="modal-content">
+    	<form class="form" ng-show="User.role=='ADMIN' || User.role=='MODERATOR'"  ng-submit="addSubForum(newForum)"> 
+			<h1>New Forum</h1>
+			<div class="form-group">
+				<label>Title:</label>
+				<input class="form-control" type="text" ng-model="newForum.title">
+			</div>
+			<div class="form-group">
+				<label>Description:</label>
+				<textarea class="form-control" style="resize:none;" required ng-model="newForum.description"></textarea>
+			</div>
+			<div class="form-group">
+				<label>Forum rules:</label>
+				<textarea class="form-control" style="resize:none;"  ng-model="newForum.rules"></textarea>
+			</div>
+			<div>
+				<button  class="btn btn-primary" type="submit" id="submitForum" >Add</button>
+			</div>
+		</form>
+  	</div>
+  	
+</div>

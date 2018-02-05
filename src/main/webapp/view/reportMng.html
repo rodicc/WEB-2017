@@ -1,0 +1,27 @@
+
+<div class="well">
+	<div class="row">
+		<div class="col-md-1" style="padding: 30px; color: darkgrey;">
+			<b>{{report.submittedByUser}}</b>
+		</div>
+		<div class="col-md-11">
+			<b>{{report.subject}}</b>
+			<textarea class="form-control" style="resize: none" rows="2"
+				cols="25" readonly>{{report.reportContent}}</textarea>
+					
+			<span class="pull-right">Report status:<b>{{report.reportStatus}}</b></span>		
+		</div>
+	</div>
+</div>
+
+<div class="well">
+		<textarea class="form-control" style="resize: none" rows="2" cols="25"
+			ng-model="reportWrapper.message.content"></textarea>
+		<form class="inline-form">
+			 <input type="radio" name="status" value="REMOVED" ng-model="reportWrapper.status"> Delete Reported Item
+  			<input type="radio" name="status" value="WARNED" ng-model="reportWrapper.status"> Send Warning
+  			<input type="radio" name="status" value="REJECTED" ng-model="reportWrapper.status"> Reject Report
+		</form>
+		
+</div>
+	<button class="btn btn-primary" ng-click="respondToReport(reportWrapper)">Send reply</button>

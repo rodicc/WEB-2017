@@ -1,0 +1,20 @@
+<h1>Report management</h1>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th class="col-md-6">Subject</th>
+			<th class="col-md-2">Submitted by</th>
+			<th class="col-md-2">Submitted on</th>
+			<th class="col-md-2">Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="report in reportList">
+			<td><a ng-href="#/reports/{{report.id}}"><b>{{report.subject}}</b></a></td>
+			<td>{{report.submittedByUser}}</td>
+			<td>{{report.date}}</td>
+			<td>{{report.reportStatus}}</td>
+		</tr>
+	</tbody>
+</table>

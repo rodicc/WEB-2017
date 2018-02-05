@@ -1,7 +1,7 @@
 package WEB.forum.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,62 +13,77 @@ public class Comment implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long commentID;
-	private Topic parentTopic;
-	private User author;
-	private Date date;
+	private int commentID;
+	private String parentTopic;
+	private String author;
+	private LocalDate date;
 	private Comment parentComment;
-	private ArrayList<Comment> childComments;
+	//private ArrayList<Comment> childComments;
 	private String content;
-	private Short likes;
-	private Short disslikes;
+	private int likes;
+	private int disslikes;
 	private Boolean edited;
+	private Boolean deleted;
+	private ArrayList<String> alreadyVoted;
 	
 	public Comment() {
-		this. childComments = new ArrayList<Comment>();
+		this.alreadyVoted = new ArrayList<String>();
 	}
 	
-	public Comment(Long commentID, Topic parentTopic, User author, Date date, Comment parentComment, 
-			ArrayList<Comment> childComments,String content, Short likes, Short disslikes, Boolean edited) {
+	public Comment(int commentID, String parentTopic, String author, LocalDate date, Comment parentComment, 
+			String content, int likes, int disslikes, Boolean edited, Boolean deleted) { //ArrayList<Comment> childComments,
 		super();
 		this.commentID = commentID;
 		this.parentTopic = parentTopic;
 		this.author = author;
 		this.date = date;
 		this.parentComment = parentComment;
-		this.childComments = childComments;
+		//this.alreadyVoted = alreadyVoted;
 		this.content = content;
 		this.likes = likes;
 		this.disslikes = disslikes;
 		this.edited = edited;
+		this.deleted = deleted;
 	}
 	
 	
 	
 	/* GETTERS & SETTERS*/
 	
-	public Topic getParentTopic() {
-		return parentTopic;
+	public Boolean getDeleted() {
+		return deleted;
 	}
-	public Long getCommentID() {
-		return commentID;
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
 	}
-	public void setCommentID(Long commentID) {
-		this.commentID = commentID;
-	}
-	public void setParenttopic(Topic parentTopic) {
+
+	public void setParentTopic(String parentTopic) {
 		this.parentTopic = parentTopic;
 	}
-	public User getAuthor() {
+
+	public String getParentTopic() {
+		return parentTopic;
+	}
+	public int getCommentID() {
+		return commentID;
+	}
+	public void setCommentID(int commentID) {
+		this.commentID = commentID;
+	}
+	public void setParenttopic(String parentTopic) {
+		this.parentTopic = parentTopic;
+	}
+	public String getAuthor() {
 		return author;
 	}
-	public void setAuthor(User author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 	public Comment getParentComment() {
@@ -77,11 +92,11 @@ public class Comment implements Serializable{
 	public void setParentComment(Comment parentComment) {
 		this.parentComment = parentComment;
 	}
-	public ArrayList<Comment> getChildComments() {
-		return childComments;
+	public ArrayList<String> getAlreadyVoted() {
+		return alreadyVoted;
 	}
-	public void setChildComments(ArrayList<Comment> childComments) {
-		this.childComments = childComments;
+	public void setAlreadyVoted(ArrayList<String> alreadyVoted) {
+		this.alreadyVoted = alreadyVoted;
 	}
 	public String getContent() {
 		return content;
@@ -89,16 +104,16 @@ public class Comment implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Short getLikes() {
+	public int getLikes() {
 		return likes;
 	}
-	public void setLikes(Short likes) {
+	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-	public Short getDisslikes() {
+	public int getDisslikes() {
 		return disslikes;
 	}
-	public void setDisslikes(Short disslikes) {
+	public void setDisslikes(int disslikes) {
 		this.disslikes = disslikes;
 	}
 	public Boolean getEdited() {

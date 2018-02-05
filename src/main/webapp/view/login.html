@@ -1,0 +1,23 @@
+<div>
+	<form name="logIn" ng-hide="loggedIn" ng-show="!loggedIn" ng-submit="login()" >
+  	<div class="col-md-4"></div>
+  	<div class="col-md-4">
+  	<div class="form-group">
+	  	<div class="input-group">
+	  		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+	  		<input class="form-control" type="text" ng-model="user.userID" placeholder="Username" name="userID" required>
+	  	</div>
+	  	
+	  	<div class="input-group">
+	  		<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	  		<input  class="form-control" type="password" ng-model="user.password" placeholder="Password" name="password" required>
+	  		
+	  	</div>
+	  	<p ng-if="logIn.userID.$dirty && logIn.password.$dirty && badCredentials">Entered username and password do not match!</p>
+	  </div>
+	  	<button class ="btn btn-success btn-block btn-lg" type="submit">Login</button>
+  	</div>
+  	<div class="col-md-4"></div>
+  </form>
+</div>
+ 
